@@ -12,7 +12,11 @@
     <script type="text/javascript" src="ui/date.js"></script>
     <script type="text/javascript" src="js/crud.js"></script>
     <script>
-        var name="emp",columns=[[
+
+        var name="emp";
+		var width = 300;
+        var height = 300;
+		columns=[[
             	{field:'uuid',title:'编号',width:100},
 	  		    {field:'username',title:'登陆名',width:100},
 	  		    {field:'name',title:'真实姓名',width:100},
@@ -30,7 +34,9 @@
 	  		    {field:'birthday',title:'出生年月日',width:100,formatter:function (value) {
 						return new Date(value).Format("yyyy-MM-dd");
                     }},
-	  		    {field:'depuuid',title:'部门编号',width:100},
+	  		    {field:'dep',title:'部门编号',width:100,formatter:function(value){
+						return value.name;
+					}},
 
             {field:'-',title:'操作',formatter: function(value,row,index){
                     var oper = "<a href=\"javascript:void(0)\" onclick=\"edit(" + row.uuid + ')">修改</a>';

@@ -40,10 +40,19 @@ $(function () {
             }); */
         });
 
+        var h = 300;
+        if (height){
+            h = height;
+        }
+        var w = 300;
+        if (width){
+            w = width;
+        }
+
         $('#editDlg').dialog({
             title: '部门编辑',
-            width: 300,
-            height: 200,
+            width: w,
+            height: h,
             closed: true,//窗口是是否为关闭状态, true：表示关闭
             modal: true//模式窗口
         });

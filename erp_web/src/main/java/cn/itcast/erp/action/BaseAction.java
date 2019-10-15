@@ -3,6 +3,7 @@ package cn.itcast.erp.action;
 import cn.itcast.erp.biz.IBaseBiz;
 import cn.itcast.erp.biz.impl.BaseBiz;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
@@ -83,7 +84,8 @@ public class BaseAction<T> {
         mapData.put("total", total);
         mapData.put("rows", list);
         //把部门列表转JSON字符串
-        String listString = JSON.toJSONString(mapData);
+        //DisableCircularReferenceDetect禁用循环引用保护
+        String listString = JSON.toJSONString(mapData,SerializerFeature.DisableCircularReferenceDetect);
         write(listString);
     }
 
@@ -92,7 +94,7 @@ public class BaseAction<T> {
      */
     public void list(){
         List<T> list = baseBiz.getList();
-        String jsonString = JSON.toJSONString(list);
+        String jsonString = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
         write(jsonString);
     }
     /**新增，修改*/

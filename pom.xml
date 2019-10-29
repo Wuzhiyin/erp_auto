@@ -10,6 +10,8 @@
         <module>erp_biz</module>
         <module>erp_web</module>
     </modules>
+
+
     <!-- 定义版本常量 -->
     <properties>
         <spring.version>4.2.4.RELEASE</spring.version>

@@ -18,7 +18,7 @@ public class GoodstypeDao extends BaseDao<Goodstype> implements IGoodstypeDao{
     public DetachedCriteria getDetachedCriteria(Goodstype goodstype1,Goodstype goodstype2,Object param){
         DetachedCriteria dc =DetachedCriteria.forClass(Goodstype.class);
         if(null != goodstype1){
-           
+
         }
         return dc;
     }

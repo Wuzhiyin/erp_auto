@@ -1,7 +1,6 @@
 package cn.itcast.erp.dao.impl;
 
 import cn.itcast.erp.dao.IBaseDao;
-import cn.itcast.erp.entity.Dep;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -34,7 +33,7 @@ public class BaseDao<T> extends HibernateDaoSupport implements IBaseDao<T> {
      * @return
      */
     public List<T> getList() {
-        return (List<T>) getHibernateTemplate().find("from T");
+        return (List<T>) getHibernateTemplate().find("FROM "+entityClass.getName());
     }
 
     /**

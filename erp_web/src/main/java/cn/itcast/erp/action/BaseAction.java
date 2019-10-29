@@ -152,7 +152,7 @@ public class BaseAction<T> {
      */
     public void get(){
         T t = (T) baseBiz.get(id);
-        String jsonString = JSON.toJSONString(t);
+        String jsonString = JSON.toJSONStringWithDateFormat(t,"yyyy-MM-dd");
         System.out.println("转换前：" + jsonString);
         //{"name":"管理员组","tele":"000011","uuid":1}
         String jsonStringAfter = mapData(jsonString, "t");
@@ -185,7 +185,15 @@ public class BaseAction<T> {
         Map<String, Object> dataMap = new HashMap<String, Object>();
         //给每key值加上前缀
         for(String key : map.keySet()){
-            dataMap.put(prefix + "." + key, map.get(key));
+            if (map.get(key) instanceof Map){
+                //key值进行拼接
+                Map<String, Object> m2 = (Map<String, Object>)map.get(key);
+                for (String key2 : m2.keySet()){
+                    dataMap.put(prefix+"."+key+"."+key2,m2.get(key2));
+                }
+            }else{
+                dataMap.put(prefix + "." + key, map.get(key));
+            }
         }
         return JSON.toJSONString(dataMap);
     }

@@ -41,11 +41,11 @@ $(function () {
         });
 
         var h = 300;
-        if (height){
+        if (typeof(height)!="undefined"){
             h = height;
         }
         var w = 300;
-        if (width){
+        if (typeof(width)!="undefined"){
             w = width;
         }
 
@@ -58,6 +58,11 @@ $(function () {
         });
 
         $('#btnSave').bind('click',function(){
+            //做表单字段验证，当所有字段都有效的时候返回true。该方法使用validatebox(验证框)插件。
+            var isValid = $('#editForm').form('validate');
+            if (isValid == false){
+                return;
+            }
             var formData = $('#editForm').serializeJSON();
             $.ajax({
                 url: name+'_' + method,

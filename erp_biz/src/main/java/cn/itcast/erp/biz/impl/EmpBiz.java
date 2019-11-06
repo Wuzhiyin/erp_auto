@@ -17,4 +17,14 @@ public class EmpBiz extends BaseBiz<Emp> implements IEmpBiz{
         this.empDao = empDao;
         super.setBaseDao(this.empDao);
     }
+     /**
+      * 用户登录
+      * @param username
+      * @param pwd
+      * @return
+      */
+     public Emp findByUsernameAndPwd(String username,String pwd){
+
+         return empDao.findByUsernameAndPwd(username,pwd);
+     }
 }

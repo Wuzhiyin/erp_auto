@@ -9,4 +9,11 @@ import java.util.List;
  */
 public interface IEmpBiz extends IBaseBiz<Emp>{
 
+    /**
+     * 用户登录
+     * @param username
+     * @param pwd
+     * @return
+     */
+    Emp findByUsernameAndPwd(String username,String pwd);
 }

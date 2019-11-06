@@ -15,6 +15,22 @@ import java.util.List;
  */
 public class EmpDao extends BaseDao<Emp> implements IEmpDao{
 
+    /**
+     * 用户登录
+     * @param username
+     * @param pwd
+     * @return
+     */
+    public Emp findByUsernameAndPwd(String username,String pwd){
+        String hql = "from Emp where username=? and pwd=?";
+        List<Emp>list = (List<Emp>) this.getHibernateTemplate().find(hql,username,pwd);
+        //能够匹配上,则返回第一个元素
+        if(list.size()>0){
+            return list.get(0);
+        }
+        //如果登录名或密码不正确
+        return null;
+    }
     public DetachedCriteria getDetachedCriteria(Emp emp1,Emp emp2,Object param){
         DetachedCriteria dc =DetachedCriteria.forClass(Emp.class);
         if(null != emp1){

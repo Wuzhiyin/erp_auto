@@ -37,8 +37,12 @@ public interface IBaseBiz<T> {
      * @return
      */
     T get(Long uuid);
-
-
+    /**
+     * 通过编号查询对象
+     * @param uuid
+     * @return
+     */
+    T get(String uuid);
     /**
      * 更新
      */

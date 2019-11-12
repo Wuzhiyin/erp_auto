@@ -27,8 +27,18 @@ var _menus={
 $(function(){	
 	//显示登录用户名
 	showName();
-	InitLeftMenu();
-	tabClose();
+    //加载菜单数据
+    $.ajax({
+        url:'menu_getMenuTree',
+        dataType:'json',
+        method:'post',
+        success:function(menu){
+            _menus = menu;
+            InitLeftMenu();
+        }
+    })
+
+    tabClose();
 	tabCloseEven();
     //退出登出
     $('#loginOut').bind('click',function(){

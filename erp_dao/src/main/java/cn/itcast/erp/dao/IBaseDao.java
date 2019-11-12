@@ -41,6 +41,12 @@ public interface IBaseDao<T> {
      */
     T get(Long uuid);
     /**
+     * 通过编号查询对象
+     * @param uuid
+     * @return
+     */
+    T get(String uuid);
+    /**
      * 更新
      */
     void update(T t);

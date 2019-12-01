@@ -3,11 +3,11 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="cn.itcast.erp.entity.Orders" table="orders" >
-                <id name="uuid" >
+        <id name="uuid" >
         	<generator class="org.hibernate.id.SequenceGenerator"> <param name="sequence">orders_seq</param> </generator>
         </id>
 
-                <property name="createtime" /> 
+        <property name="createtime" />
         <property name="checktime" /> 
         <property name="starttime" /> 
         <property name="endtime" /> 
@@ -20,6 +20,10 @@
         <property name="totalmoney" /> 
         <property name="state" /> 
         <property name="waybillsn" /> 
-
+        <!--级联更新-->
+        <bag name="orderDetails" order-by="uuid" cascade="save-update" inverse="true">
+            <key column="ordersuuid"></key>
+            <one-to-many class="cn.itcast.erp.entity.Orderdetail"></one-to-many>
+        </bag>
     </class>
 </hibernate-mapping>

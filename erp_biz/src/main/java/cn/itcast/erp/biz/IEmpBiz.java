@@ -1,6 +1,7 @@
 package cn.itcast.erp.biz;
 
 import cn.itcast.erp.entity.Emp;
+import cn.itcast.erp.exception.ErpException;
 
 import java.util.List;
 /**
@@ -16,4 +17,21 @@ public interface IEmpBiz extends IBaseBiz<Emp>{
      * @return
      */
     Emp findByUsernameAndPwd(String username,String pwd);
+
+
+    /**
+     * 更新员工密码
+     * @param id
+     * @param oldPwd
+     * @param newPwd
+     * @throws ErpException
+     */
+    void updatePwd(Long id,String oldPwd ,String newPwd) throws ErpException;
+
+    /**
+     * 重置员工密码
+     * @param uuid
+     * @param newPwd
+     */
+    void updatePwd_reset(Long uuid,String newPwd);
 }

@@ -18,7 +18,8 @@ public class SupplierDao extends BaseDao<Supplier> implements ISupplierDao{
     public DetachedCriteria getDetachedCriteria(Supplier supplier1,Supplier supplier2,Object param){
         DetachedCriteria dc =DetachedCriteria.forClass(Supplier.class);
         if(null != supplier1){
-           
+           //区分供应商或客户
+            dc.add(Restrictions.eq("type",supplier1.getType()));
         }
         return dc;
     }

@@ -2,6 +2,7 @@ package cn.itcast.erp.dao.impl;
 
 import cn.itcast.erp.dao.IEmpDao;
 import cn.itcast.erp.entity.Emp;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
@@ -23,6 +24,7 @@ public class EmpDao extends BaseDao<Emp> implements IEmpDao{
      */
     public Emp findByUsernameAndPwd(String username,String pwd){
         String hql = "from Emp where username=? and pwd=?";
+
         List<Emp>list = (List<Emp>) this.getHibernateTemplate().find(hql,username,pwd);
         //能够匹配上,则返回第一个元素
         if(list.size()>0){
@@ -31,6 +33,12 @@ public class EmpDao extends BaseDao<Emp> implements IEmpDao{
         //如果登录名或密码不正确
         return null;
     }
+
+    public void updatePwd(Long uuid, String newPwd) {
+        String hql = "update Emp set pwd=? where uuid=?";
+        this.getHibernateTemplate().bulkUpdate(hql,newPwd,uuid);
+    }
+
     public DetachedCriteria getDetachedCriteria(Emp emp1,Emp emp2,Object param){
         DetachedCriteria dc =DetachedCriteria.forClass(Emp.class);
         if(null != emp1){
@@ -55,5 +63,8 @@ public class EmpDao extends BaseDao<Emp> implements IEmpDao{
         }
         return dc;
     }
+
+
+
 
 }

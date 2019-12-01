@@ -1,22 +1,33 @@
 package cn.itcast.erp.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import java.util.Date;
+
 /**
  * 订单明细 实体类
  */
 public class Orderdetail {
-    	private Long uuid;//编号
+	/** 未入库*/
+	public static final String STATE_NOT_IN = "0";
+	/** 已入库*/
+	public static final String STATE_IN = "1";
+
+    private Long uuid;//编号
 	private Long goodsuuid;//商品编号
 	private String goodsname;//商品名称
 	private Double price;//价格
 	private Long num;//数量
 	private Double money;//金额
-	private java.util.Date endtime;//结束日期
+	private Date endtime;//结束日期
 	private Long ender;//库管员
 	private Long storeuuid;//仓库编号
 	private String state;//采购：0=未入库，1=已入库  销售：0=未出库，1=已出库
-	private Long ordersuuid;//订单编号
 
-    	public Long getUuid() {		
+	@JSONField(serialize = false)
+	private Orders orders;//明细对就的订单
+
+    public Long getUuid() {
 		return uuid;
 	}
 	public void setUuid(Long uuid) {
@@ -76,11 +87,12 @@ public class Orderdetail {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Long getOrdersuuid() {		
-		return ordersuuid;
-	}
-	public void setOrdersuuid(Long ordersuuid) {
-		this.ordersuuid = ordersuuid;
+
+	public Orders getOrders() {
+		return orders;
 	}
 
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
 }

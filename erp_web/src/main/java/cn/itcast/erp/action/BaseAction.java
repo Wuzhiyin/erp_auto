@@ -2,8 +2,10 @@ package cn.itcast.erp.action;
 
 import cn.itcast.erp.biz.IBaseBiz;
 import cn.itcast.erp.biz.impl.BaseBiz;
+import cn.itcast.erp.entity.Emp;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
@@ -215,5 +217,11 @@ public class BaseAction<T> {
         }
     }
 
-
+    /**
+     * 获取当前登录的用户
+     * @return
+     */
+    public Emp getLoginUser(){
+        return (Emp) ActionContext.getContext().getSession().get("loginUser");
+    }
 }

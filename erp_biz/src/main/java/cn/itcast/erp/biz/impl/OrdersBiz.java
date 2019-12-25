@@ -8,6 +8,7 @@ import cn.itcast.erp.dao.IOrdersDao;
 import cn.itcast.erp.dao.ISupplierDao;
 import cn.itcast.erp.entity.Orderdetail;
 import cn.itcast.erp.entity.Orders;
+import cn.itcast.erp.exception.ErpException;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -53,7 +54,7 @@ public class OrdersBiz extends BaseBiz<Orders> implements IOrdersBiz{
          //新增的采购订单状态都是未审核
          orders.setState(Orders.STATE_CREATE);
          //设置订单类型为采购
-         orders.setType(Orders.TYPE_IN);
+//         orders.setType(Orders.TYPE_IN);
          //设置订单的创建时间为当前服务器时间
          orders.setCreatetime(new Date());
 
@@ -140,4 +141,44 @@ public class OrdersBiz extends BaseBiz<Orders> implements IOrdersBiz{
         }
         return supplierName;
     }
- }
+
+    /**
+     * 采购订单审核业务
+     * @param uuid
+     * @param empUuid
+     */
+    public void doCheck(Long uuid, Long empUuid) {
+        //获取订单信息
+        Orders orders = ordersDao.get(uuid);
+        //检查订单的状态是否为未审核
+        if (!Orders.STATE_CREATE.equals(orders.getState())){
+            throw new ErpException("亲!该订单已经审核过了");
+        }
+        //更新审核员
+        orders.setChecker(empUuid);
+        //更新审核时间
+        orders.setChecktime(new Date());
+        //更新订单状态为已审核
+        orders.setState(Orders.STATE_CHECK);
+    }
+
+    /**
+     * 采购订单确认业务
+     * @param uuid
+     * @param empUuid
+     */
+    public void doStart(Long uuid, Long empUuid) {
+        //获取订单信息
+        Orders orders = ordersDao.get(uuid);
+        //检查订单的状态是否为已审核
+        if (!Orders.STATE_CHECK.equals(orders.getState())){
+            throw new ErpException("亲!该订单已经确认过了");
+        }
+        //更新确认人员
+        orders.setStarter(empUuid);
+        //更新确认时间
+        orders.setStarttime(new Date());
+        //更新订单状态为已确认
+        orders.setState(Orders.STATE_START);
+    }
+}

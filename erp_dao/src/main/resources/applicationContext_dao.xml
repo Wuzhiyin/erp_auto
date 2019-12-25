@@ -82,6 +82,9 @@
 			<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-
+	<!-- 报表统计 -->
+	<bean id="reportDao" class="cn.itcast.erp.dao.impl.ReportDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>
 	

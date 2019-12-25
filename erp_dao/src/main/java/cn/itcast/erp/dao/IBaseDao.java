@@ -13,11 +13,12 @@ public interface IBaseDao<T> {
     public List<T> getList();
 
     /**
-     * 条件查询
+     * 分页条件查询
      * @param t1
      * @return
      */
     List<T> getList(T t1,T t2,Object param,int firstResult,int maxResults);
+
     /**
      * 记录条件查询的总记录数
      * @param t1

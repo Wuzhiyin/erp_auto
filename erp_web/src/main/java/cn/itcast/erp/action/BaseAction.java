@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
@@ -224,4 +223,12 @@ public class BaseAction<T> {
     public Emp getLoginUser(){
         return (Emp) ActionContext.getContext().getSession().get("loginUser");
     }
+
+    /**
+     * 转换成JSON格式字符串后输出给页面
+     * @param rtn
+     */
+//    public void write2UI(Object rtn){
+//        Util.write2UI(JSON.toJSONString(rtn),ServletActionContext.getResponse());
+//    }
 }

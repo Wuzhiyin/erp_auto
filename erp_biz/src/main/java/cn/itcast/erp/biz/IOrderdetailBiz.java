@@ -8,5 +8,18 @@ import java.util.List;
  * @author Wilson
  */
 public interface IOrderdetailBiz extends IBaseBiz<Orderdetail>{
-
+    /**
+     * 采购入库
+     * @param uuid 明细编号
+     * @param storeUuid 仓库编号
+     * @param empUuid 库管员编号
+     */
+    void doInStore(Long uuid, Long storeUuid, Long empUuid);
+    /**
+     * 出库
+     * @param uuid 明细编号
+     * @param storeUuid 仓库编号
+     * @param empUuid 库管员编号
+     */
+    void doOutStore(Long uuid, Long storeUuid, Long empUuid);
 }

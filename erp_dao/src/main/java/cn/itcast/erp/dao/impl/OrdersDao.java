@@ -26,7 +26,13 @@ public class OrdersDao extends BaseDao<Orders> implements IOrdersDao{
             if (null != orders1.getState() && orders1.getState().trim().length()>0){
                 dc.add(Restrictions.eq("state",orders1.getState()));
             }
+
+            //查询我的订单
+            if (orders1.getCreater() != null) {
+                dc.add(Restrictions.eq("creater",orders1.getCreater()));
+            }
         }
+
         return dc;
     }
 
